@@ -35,6 +35,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private PackController packController;
         private CartonController cartonController;
         private PalletController palletController;
+        private CartonController checkController;
 
         private PackViewModel packViewModel;
         private CartonViewModel cartonViewModel;
