@@ -14,5 +14,7 @@ namespace TotalCore.Services.Productions
 
         bool UpdateEntryStatus(string cartonIDs, GlobalVariables.BarcodeStatus barcodeStatus);
         bool UpdateSubmitStatus(string cartonIDs, GlobalVariables.SubmitStatus submitStatus, string remarks);
+
+        bool CartonChecked(int? batchID, string label);
     }
 }

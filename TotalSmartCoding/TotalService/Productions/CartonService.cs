@@ -26,7 +26,7 @@ namespace TotalService.Productions
 
             this.ServiceBag.Remove("PackIDs");
             this.ServiceBag.Remove("DeletePack");
-            
+
             return objectParameters;
         }
 
@@ -77,5 +77,20 @@ namespace TotalService.Productions
             }
         }
 
+
+        public bool CartonChecked(int? batchID, string label)
+        {
+            try
+            {
+                this.cartonRepository.CartonChecked(batchID, label);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Exception baseException = ex.GetBaseException();
+                this.ServiceTag = baseException != null ? baseException.Message : ex.Message;
+                return false;
+            }
+        }
     }
 }

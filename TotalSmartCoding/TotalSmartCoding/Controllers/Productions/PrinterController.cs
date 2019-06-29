@@ -1051,6 +1051,8 @@ namespace TotalSmartCoding.Controllers.Productions
             this.LoopRoutine = true; this.StopPrint();
 
 
+            this.setLED(true, this.LedAmberOn, this.LedRedOn); return; //TESTDOUBLECHECK
+
             //if (GlobalEnums.OnTestPrinter && this.printerName != GlobalVariables.PrinterName.DigitInkjet) this.feedbackNextNo(CommonExpressions.IncrementSerialNo(this.getNextNo()));
 
             //This command line is specific to: PalletLabel ON FillingLine.Drum || CartonInkjet ON FillingLine.Pail (Just here only for this specific)

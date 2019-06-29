@@ -3540,5 +3540,18 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("BatchExtraUpdate", batchIDParameter, sentPackNoParameter, sentCartonNoParameter, sentPalletNoParameter);
         }
+    
+        public virtual int CartonChecked(Nullable<int> batchID, string label)
+        {
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
+    
+            var labelParameter = label != null ?
+                new ObjectParameter("Label", label) :
+                new ObjectParameter("Label", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CartonChecked", batchIDParameter, labelParameter);
+        }
     }
 }

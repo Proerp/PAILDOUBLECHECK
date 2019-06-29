@@ -73,6 +73,8 @@
           <Property Name="PackCounts" Type="int" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
           <Property Name="SubmitStatusID" Type="int" Nullable="false" />
+          <Property Name="CheckedID" Type="int" Nullable="false" />
+          <Property Name="CheckedDate" Type="datetime" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="ColumnMappings">
@@ -2444,6 +2446,10 @@
         <Function Name="BinLocationSaveRelative" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
           <Parameter Name="SaveRelativeOption" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CartonChecked" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BatchID" Type="int" Mode="In" />
+          <Parameter Name="Label" Type="varchar" Mode="In" />
         </Function>
         <Function Name="CartonEditable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EntityID" Type="int" Mode="In" />
@@ -5421,6 +5427,10 @@
             <Parameter Name="SentCartonNo" Mode="In" Type="String" />
             <Parameter Name="SentPalletNo" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="CartonChecked">
+            <Parameter Name="BatchID" Mode="In" Type="Int32" />
+            <Parameter Name="Label" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -6320,6 +6330,8 @@
           <Property Name="Label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="SubmitStatusID" Type="Int32" Nullable="false" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CheckedID" Type="Int32" Nullable="false" />
+          <Property Name="CheckedDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Pack">
           <Key>
@@ -9333,6 +9345,7 @@
           <Property Type="DateTime" Name="EntryDate" Nullable="true" />
           <Property Type="Int32" Name="UniqueCartonCounts" Nullable="false" />
           <Property Type="String" Name="CommodityOfficialCode" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="UniqueCheckedID" Nullable="false" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -10352,6 +10365,8 @@
           <EntitySetMapping Name="Cartons">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Carton">
               <MappingFragment StoreEntitySet="Cartons">
+                <ScalarProperty Name="CheckedDate" ColumnName="CheckedDate" />
+                <ScalarProperty Name="CheckedID" ColumnName="CheckedID" />
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="SubmitStatusID" ColumnName="SubmitStatusID" />
                 <ScalarProperty Name="Label" ColumnName="Label" />
@@ -12379,10 +12394,12 @@
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="UniqueCartonCounts" ColumnName="UniqueCartonCounts" />
                 <ScalarProperty Name="CommodityOfficialCode" ColumnName="CommodityOfficialCode" />
+                <ScalarProperty Name="UniqueCheckedID" ColumnName="UniqueCheckedID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="BatchExtraUpdate" FunctionName="TotalSmartCodingModel.Store.BatchExtraUpdate" />
+          <FunctionImportMapping FunctionImportName="CartonChecked" FunctionName="TotalSmartCodingModel.Store.CartonChecked" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

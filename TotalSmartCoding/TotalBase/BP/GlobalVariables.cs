@@ -80,7 +80,8 @@ namespace TotalBase
             PackScanner = 2,
             CartonScanner = 3,
             PalletScanner = 6,
-            LabelScanner = 8
+            LabelScanner = 8,
+            CheckScanner = 10
         }
 
         public enum BarcodeName

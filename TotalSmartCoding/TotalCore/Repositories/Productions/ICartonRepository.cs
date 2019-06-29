@@ -13,5 +13,7 @@ namespace TotalCore.Repositories.Productions
 
         void UpdateEntryStatus(string cartonIDs, GlobalVariables.BarcodeStatus barcodeStatus);
         void UpdateSubmitStatus(string cartonIDs, GlobalVariables.SubmitStatus submitStatus, string remarks);
+
+        void CartonChecked(int? batchID, string label);
     }
 }

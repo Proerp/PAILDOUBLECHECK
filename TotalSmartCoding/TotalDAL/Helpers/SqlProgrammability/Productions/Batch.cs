@@ -61,7 +61,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " WITH ENCRYPTION " + "\r\n";
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "       SET         @ToDate = DATEADD (hour, 23, DATEADD (minute, 59, DATEADD (second, 59, @ToDate))) " + "\r\n";
-            queryString = queryString + "       SELECT      CartonSumups.FillingLineID, CartonSumups.BatchID, Batches.Code AS BatchCode, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, CartonSumups.EntryDate, CartonSumups.CartonCounts, ISNULL(UniqueCartonSumups.UniqueCartonCounts, 0) AS UniqueCartonCounts " + "\r\n";
+            queryString = queryString + "       SELECT      CartonSumups.FillingLineID, CartonSumups.BatchID, Batches.Code AS BatchCode, Commodities.CommodityID, Commodities.Code AS CommodityCode, Commodities.OfficialCode AS CommodityOfficialCode, Commodities.Name AS CommodityName, CartonSumups.EntryDate, CartonSumups.CartonCounts, ISNULL(UniqueCartonSumups.UniqueCartonCounts, 0) AS UniqueCartonCounts, ISNULL(UniqueCartonSumups.UniqueCheckedOut, 0) AS UniqueCheckedOut " + "\r\n";
             queryString = queryString + "       FROM        " + "\r\n";
             queryString = queryString + "                  (SELECT          FillingLineID, BatchID, CAST(EntryDate AS DATE) AS EntryDate, COUNT(*) AS CartonCounts " + "\r\n";
             queryString = queryString + "                   FROM            Cartons " + "\r\n";
@@ -71,9 +71,9 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "                   INNER JOIN Batches ON CartonSumups.BatchID = Batches.BatchID " + "\r\n";
             queryString = queryString + "                   INNER JOIN Commodities ON Batches.CommodityID = Commodities.CommodityID " + "\r\n"; 
 
-            queryString = queryString + "                   LEFT JOIN " + "\r\n"; 
-            queryString = queryString + "                  (SELECT          FillingLineID, BatchID, EntryDate, COUNT(*) AS UniqueCartonCounts " + "\r\n";
-            queryString = queryString + "                   FROM           (SELECT        FillingLineID, BatchID, CAST(EntryDate AS DATE) AS EntryDate, Label FROM Cartons WHERE EntryDate >= @FromDate AND EntryDate <= @ToDate AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs)) GROUP BY FillingLineID, BatchID, CAST(EntryDate AS DATE), Label) UniqueCartons" + "\r\n";
+            queryString = queryString + "                   LEFT JOIN " + "\r\n";
+            queryString = queryString + "                  (SELECT          FillingLineID, BatchID, EntryDate, COUNT(*) AS UniqueCartonCounts, SUM(CheckedOut) AS UniqueCheckedOut " + "\r\n";
+            queryString = queryString + "                   FROM           (SELECT        FillingLineID, BatchID, CAST(EntryDate AS DATE) AS EntryDate, Label, MAX(IIF(CheckedOut > 0, 1, 0)) AS CheckedOut FROM Cartons WHERE EntryDate >= @FromDate AND EntryDate <= @ToDate AND EntryStatusID IN (SELECT Id FROM dbo.SplitToIntList (@EntryStatusIDs)) GROUP BY FillingLineID, BatchID, CAST(EntryDate AS DATE), Label) UniqueCartons" + "\r\n";
             queryString = queryString + "                   GROUP BY        FillingLineID, BatchID, EntryDate) UniqueCartonSumups ON CartonSumups.FillingLineID = UniqueCartonSumups.FillingLineID AND CartonSumups.BatchID = UniqueCartonSumups.BatchID AND CartonSumups.EntryDate = UniqueCartonSumups.EntryDate " + "\r\n";
 
             queryString = queryString + "       ORDER BY    CartonSumups.EntryDate DESC " + "\r\n";

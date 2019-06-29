@@ -39,5 +39,10 @@ namespace TotalDAL.Repositories.Productions
         {
             this.TotalSmartCodingEntities.CartonUpdateSubmitStatus(cartonIDs, (int)submitStatus, remarks);
         }
+
+        public void CartonChecked(int? batchID, string label)
+        {
+            this.TotalSmartCodingEntities.CartonChecked(batchID, label);
+        }
     }
 }

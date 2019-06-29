@@ -893,6 +893,10 @@ namespace TotalModel.Models
         public int OrganizationalUnitID { get; set; }
     }
 
+    public partial class BatchSumup
+    {
+        public decimal a { get { return this.UniqueCartonCounts - this.UniqueCheckedID; } }
+    }
 
     public partial class Pack : IPrimitiveEntity, IBaseEntity
     {

@@ -45,6 +45,7 @@ namespace TotalSmartCoding.Controllers.Productions
         private IONetSocket ionetSocketCarton;
         private IONetSocket ionetSocketLabel;
         private IONetSocket ionetSocketPallet;
+        private IONetSocket ionetSocketCheck;
 
 
         private BarcodeQueue<PackDTO> packQueue;
@@ -93,6 +94,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.packController = new PackController(CommonNinject.Kernel.Get<IPackService>(), this.packViewModel);
                 this.cartonController = new CartonController(CommonNinject.Kernel.Get<ICartonService>(), this.cartonViewModel);
                 this.palletController = new PalletController(CommonNinject.Kernel.Get<IPalletService>(), this.palletViewModel);
+                this.checkController = new CartonController(CommonNinject.Kernel.Get<ICartonService>(), this.cartonViewModel);
 
                 ProductionAPIs productionAPIs = new ProductionAPIs();
 
@@ -100,6 +102,7 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.ionetSocketCarton = new IONetSocket(IPAddress.Parse(productionAPIs.IpAddress((int)GlobalVariables.ScannerName.Base + (int)GlobalVariables.ScannerName.CartonScanner)), 23, 120);
                 this.ionetSocketLabel = new IONetSocket(IPAddress.Parse(productionAPIs.IpAddress((int)GlobalVariables.ScannerName.Base + (int)GlobalVariables.ScannerName.LabelScanner)), 23, 120);
                 this.ionetSocketPallet = new IONetSocket(IPAddress.Parse(productionAPIs.IpAddress((int)GlobalVariables.ScannerName.Base + (int)GlobalVariables.ScannerName.PalletScanner)), 23, 120);
+                this.ionetSocketCheck = new IONetSocket(IPAddress.Parse(productionAPIs.IpAddress((int)GlobalVariables.ScannerName.Base + (int)GlobalVariables.ScannerName.CheckScanner)), 23, 120);
 
 
                 this.packQueue = new BarcodeQueue<PackDTO>(this.FillingData.HasPackLabel, this.FillingData.NoSubQueue, this.FillingData.ItemPerSubQueue, this.FillingData.RepeatSubQueueIndex) { ItemPerSet = this.FillingData.PackPerCarton };
@@ -571,6 +574,9 @@ namespace TotalSmartCoding.Controllers.Productions
 
                     if (this.FillingData.HasPallet && !GlobalEnums.CBPP && !GlobalEnums.OnTestPalletScanner)
                         this.ionetSocketPallet.Connect();
+
+                    if (this.FillingData.HasCheck && !GlobalEnums.OnTestCheckScanner)
+                        this.ionetSocketCheck.Connect();
                 }
 
                 this.setLED(true, false, false);
@@ -593,6 +599,8 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.ionetSocketPack.Disconnect();
 
                 this.ionetSocketPallet.Disconnect();
+
+                this.ionetSocketCheck.Disconnect();
 
 
                 if (!GlobalEnums.OnTestScanner && this.FillingData.HasCarton && !this.FillingData.PalletCameraOnly)
@@ -653,6 +661,14 @@ namespace TotalSmartCoding.Controllers.Productions
                         lock (this.ionetSocketPallet)
                         {
                             this.ionetSocketPallet.ReadoutStream();
+                        }
+                    }
+
+                    if (this.FillingData.HasCheck && !GlobalEnums.OnTestCheckScanner)
+                    {
+                        lock (this.ionetSocketCheck)
+                        {
+                            this.ionetSocketCheck.ReadoutStream();
                         }
                     }
                 }
@@ -738,6 +754,13 @@ namespace TotalSmartCoding.Controllers.Productions
                         else
                             if (this.palletController.palletService.GetPalletChanged(this.FillingData.FillingLineID))
                                 this.InitializePallet();
+                    }
+
+
+                    if (this.FillingData.HasCheck)
+                    {
+                        if (this.OnScanning && this.waitforCheck(ref stringReceived))
+                            this.CartonCheck(stringReceived);
                     }
 
 
@@ -1188,6 +1211,57 @@ namespace TotalSmartCoding.Controllers.Productions
                 this.MainStatus = exception.Message;
             }
         }
+
+
+
+        private bool waitforCheck(ref string stringReceived)
+        {
+            if (GlobalEnums.OnTestScanner || GlobalEnums.OnTestCheckScanner)
+                if ((DateTime.Now.Second % 10) == 0) { stringReceived = ""; } else stringReceived = "";
+            else
+                stringReceived = this.ionetSocketCheck.ReadoutStream().Trim();
+
+            if (GlobalEnums.ShowStringReceived && stringReceived != null && stringReceived != "") { this.MainStatus = ""; this.MainStatus = stringReceived; }
+
+            return stringReceived != null && stringReceived != "";
+        }
+
+        private void CartonCheck(string stringReceived)
+        {
+            string[] arrayBarcode = stringReceived.Split(new string[] { GlobalVariables.charTAB }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (arrayBarcode.Count() > 0)
+            {
+                if (arrayBarcode.Count() > 1 || !this.OnScanning)
+                {
+                    this.ionetSocketCheck.WritetoStream("||>OUTPUT.USER2\r\n");
+                    this.MainStatus = ""; this.MainStatus = "DBC: " + (arrayBarcode.Count() > 1 ? "Không thể kiểm tra 2 xô cùng lúc." : "Hệ thống kiểm tra chưa hoạt động");
+                }
+                else
+                    if (arrayBarcode[0] == "NoRead")
+                    {
+                        //this.ionetSocketCheck.WritetoStream("||>OUTPUT.USER3\r\n"); NO NEED
+                        this.MainStatus = ""; this.MainStatus = "DBC: " + "NoRead.";
+                    }
+                    else
+                    {
+                        bool cartonChecked = false;
+                        lock (this.cartonController)
+                        {
+                            cartonChecked = this.cartonController.cartonService.CartonChecked(this.FillingData.BatchID, arrayBarcode[0]);
+                        }
+
+                        if (cartonChecked)
+                            this.ionetSocketCheck.WritetoStream("||>OUTPUT.USER1\r\n");
+                        else
+                        {
+                            this.ionetSocketCheck.WritetoStream("||>OUTPUT.USER2\r\n");
+                            this.MainStatus = ""; this.MainStatus = "DBC: " + arrayBarcode[0] + this.cartonController.cartonService.ServiceTag;
+                        }
+                    }
+            }
+        }
+
 
         #endregion Public Thread
 

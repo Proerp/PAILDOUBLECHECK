@@ -23,5 +23,6 @@ namespace TotalModel.Models
         public Nullable<System.DateTime> EntryDate { get; set; }
         public int UniqueCartonCounts { get; set; }
         public string CommodityOfficialCode { get; set; }
+        public int UniqueCheckedID { get; set; }
     }
 }

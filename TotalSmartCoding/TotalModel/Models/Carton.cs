@@ -38,6 +38,8 @@ namespace TotalModel.Models
         public string Label { get; set; }
         public int SubmitStatusID { get; set; }
         public string Remarks { get; set; }
+        public int CheckedID { get; set; }
+        public Nullable<System.DateTime> CheckedDate { get; set; }
     
         public virtual FillingLine FillingLine { get; set; }
         public virtual Pallet Pallet { get; set; }

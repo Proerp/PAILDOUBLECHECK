@@ -30,6 +30,7 @@
 
         public static bool OnTestScanner = false; //1
         public static bool OnTestPalletScanner = false; //3 //WHEN REAL TEST WITHOUT PalletScanner
+        public static bool OnTestCheckScanner = false; //4 //WHEN REAL TEST WITHOUT CheckScanner
 
         public static bool OnTestPrinter = false; //2
         public static bool OnTestDigit = false; //TRUE WHEN REAL TEST WITHOUT DIGIT PRINTER

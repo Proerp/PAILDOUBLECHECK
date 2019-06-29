@@ -28,6 +28,8 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.CartonUpdateEntryStatus();
             this.CartonUpdateSubmitStatus();
 
+            this.CartonChecked();
+
             this.SearchCartons();
         }
 
@@ -217,6 +219,25 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
         }
 
 
+
+        private void CartonChecked()
+        {
+            string queryString = " @BatchID int, @Label varchar(50) " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+            queryString = queryString + "       UPDATE      Cartons " + "\r\n";
+            queryString = queryString + "       SET         CheckedOut = CheckedOut + 1, CheckedDate = GETDATE() " + "\r\n";
+            queryString = queryString + "       WHERE       BatchID = @BatchID AND Label = @Label AND NOT PalletID IS NULL " + "\r\n";
+
+            queryString = queryString + "       IF @@ROWCOUNT = 0 " + "\r\n";
+            queryString = queryString + "           BEGIN " + "\r\n";
+            queryString = queryString + "               DECLARE     @msg NVARCHAR(300) = N' không tìm thấy trong hệ thống!' ; " + "\r\n";
+            queryString = queryString + "               THROW       61001,  @msg, 1; " + "\r\n";
+            queryString = queryString + "           END " + "\r\n";
+
+
+            this.totalSmartCodingEntities.CreateStoredProcedure("CartonChecked", queryString);
+        }
 
         private void SearchCartons()
         {

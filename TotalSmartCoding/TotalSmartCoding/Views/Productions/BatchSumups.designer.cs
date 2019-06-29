@@ -204,13 +204,13 @@
             this.layoutTop.Controls.Add(this.dateTimexLowerFillterDate, 3, 0);
             this.layoutTop.Dock = System.Windows.Forms.DockStyle.Right;
             this.layoutTop.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutTop.Location = new System.Drawing.Point(306, 0);
+            this.layoutTop.Location = new System.Drawing.Point(337, 0);
             this.layoutTop.Margin = new System.Windows.Forms.Padding(0);
             this.layoutTop.Name = "layoutTop";
             this.layoutTop.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.layoutTop.RowCount = 1;
             this.layoutTop.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.layoutTop.Size = new System.Drawing.Size(618, 45);
+            this.layoutTop.Size = new System.Drawing.Size(587, 45);
             this.layoutTop.TabIndex = 94;
             // 
             // toolStrip2
@@ -225,7 +225,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(240, 0);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.toolStrip2.Size = new System.Drawing.Size(378, 39);
+            this.toolStrip2.Size = new System.Drawing.Size(347, 39);
             this.toolStrip2.TabIndex = 1;
             this.toolStrip2.Text = "toolStrip2";
             // 
