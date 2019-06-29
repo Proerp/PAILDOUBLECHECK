@@ -73,7 +73,7 @@
           <Property Name="PackCounts" Type="int" Nullable="false" />
           <Property Name="EntryStatusID" Type="int" Nullable="false" />
           <Property Name="SubmitStatusID" Type="int" Nullable="false" />
-          <Property Name="CheckedID" Type="int" Nullable="false" />
+          <Property Name="CheckedOut" Type="int" Nullable="false" />
           <Property Name="CheckedDate" Type="datetime" />
           <Property Name="Remarks" Type="nvarchar" MaxLength="100" />
         </EntityType>
@@ -4098,7 +4098,7 @@
             <Parameter Name="CartonIDs" Mode="In" Type="String" />
             <Parameter Name="EntryStatusID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetCartons" EntitySet="Cartons" ReturnType="Collection(TotalSmartCodingModel.Carton)">
+          <FunctionImport Name="GetCartons">
             <Parameter Name="FillingLineID" Mode="In" Type="Int32" />
             <Parameter Name="EntryStatusIDs" Mode="In" Type="String" />
             <Parameter Name="PalletID" Mode="In" Type="Int32" />
@@ -4316,21 +4316,8 @@
             <Parameter Name="FromDate" Mode="In" Type="DateTime" />
             <Parameter Name="ToDate" Mode="In" Type="DateTime" />
           </FunctionImport>
-          <EntitySet Name="Cartons" EntityType="TotalSmartCodingModel.Carton" />
           <EntitySet Name="Packs" EntityType="TotalSmartCodingModel.Pack" />
           <EntitySet Name="Pallets" EntityType="TotalSmartCodingModel.Pallet" />
-          <AssociationSet Name="FK_Cartons_FillingLines" Association="TotalSmartCodingModel.FK_Cartons_FillingLines">
-            <End Role="FillingLine" EntitySet="FillingLines" />
-            <End Role="Carton" EntitySet="Cartons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Cartons_Pallets" Association="TotalSmartCodingModel.FK_Cartons_Pallets">
-            <End Role="Pallet" EntitySet="Pallets" />
-            <End Role="Carton" EntitySet="Cartons" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Packs_Cartons" Association="TotalSmartCodingModel.FK_Packs_Cartons">
-            <End Role="Carton" EntitySet="Cartons" />
-            <End Role="Pack" EntitySet="Packs" />
-          </AssociationSet>
           <AssociationSet Name="FK_Packs_FillingLines" Association="TotalSmartCodingModel.FK_Packs_FillingLines">
             <End Role="FillingLine" EntitySet="FillingLines" />
             <End Role="Pack" EntitySet="Packs" />
@@ -4339,10 +4326,6 @@
           <Parameter Name="FillingLineID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="PickupDetails" EntityType="TotalSmartCodingModel.PickupDetail" />
-          <AssociationSet Name="FK_PickupDetails_Cartons" Association="TotalSmartCodingModel.FK_PickupDetails_Cartons">
-            <End Role="Carton" EntitySet="Cartons" />
-            <End Role="PickupDetail" EntitySet="PickupDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_PickupDetails_Packs" Association="TotalSmartCodingModel.FK_PickupDetails_Packs">
             <End Role="Pack" EntitySet="Packs" />
             <End Role="PickupDetail" EntitySet="PickupDetails" />
@@ -4383,10 +4366,6 @@
           <Parameter Name="ModuleID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Commodities" EntityType="TotalSmartCodingModel.Commodity" />
-          <AssociationSet Name="FK_Cartons_Commodities" Association="TotalSmartCodingModel.FK_Cartons_Commodities">
-            <End Role="Commodity" EntitySet="Commodities" />
-            <End Role="Carton" EntitySet="Cartons" />
-          </AssociationSet>
           <AssociationSet Name="FK_DeliveryAdviceDetails_Commodities" Association="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Commodities">
             <End Role="Commodity" EntitySet="Commodities" />
             <End Role="DeliveryAdviceDetail" EntitySet="DeliveryAdviceDetails" />
@@ -4563,10 +4542,6 @@
           <EntitySet Name="GoodsReceipts" EntityType="TotalSmartCodingModel.GoodsReceipt" />
           <AssociationSet Name="FK_GoodsReceiptDetails_BinLocations" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_BinLocations">
             <End Role="BinLocation" EntitySet="BinLocations" />
-            <End Role="GoodsReceiptDetail" EntitySet="GoodsReceiptDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK_GoodsReceiptDetails_Cartons" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons">
-            <End Role="Carton" EntitySet="Cartons" />
             <End Role="GoodsReceiptDetail" EntitySet="GoodsReceiptDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_GoodsReceiptDetails_Commodities" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities">
@@ -4749,10 +4724,6 @@
             <End Role="BinLocation" EntitySet="BinLocations" />
             <End Role="WarehouseAdjustmentDetail" EntitySet="WarehouseAdjustmentDetails" />
           </AssociationSet>
-          <AssociationSet Name="FK_WarehouseAdjustmentDetails_Cartons" Association="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Cartons">
-            <End Role="Carton" EntitySet="Cartons" />
-            <End Role="WarehouseAdjustmentDetail" EntitySet="WarehouseAdjustmentDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_WarehouseAdjustmentDetails_Commodities" Association="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Commodities">
             <End Role="Commodity" EntitySet="Commodities" />
             <End Role="WarehouseAdjustmentDetail" EntitySet="WarehouseAdjustmentDetails" />
@@ -4805,7 +4776,7 @@
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="WarehouseAdjustment" EntitySet="WarehouseAdjustments" />
           </AssociationSet>
-          <FunctionImport Name="SearchCartons" EntitySet="Cartons" ReturnType="Collection(TotalSmartCodingModel.Carton)">
+          <FunctionImport Name="SearchCartons">
           <Parameter Name="Barcode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SearchPacks" EntitySet="Packs" ReturnType="Collection(TotalSmartCodingModel.Pack)">
@@ -5431,6 +5402,35 @@
             <Parameter Name="BatchID" Mode="In" Type="Int32" />
             <Parameter Name="Label" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Cartons" EntityType="TotalSmartCodingModel.Carton" />
+          <AssociationSet Name="FK_Cartons_Commodities" Association="TotalSmartCodingModel.FK_Cartons_Commodities">
+            <End Role="Commodity" EntitySet="Commodities" />
+            <End Role="Carton" EntitySet="Cartons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cartons_FillingLines" Association="TotalSmartCodingModel.FK_Cartons_FillingLines">
+            <End Role="FillingLine" EntitySet="FillingLines" />
+            <End Role="Carton" EntitySet="Cartons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cartons_Pallets" Association="TotalSmartCodingModel.FK_Cartons_Pallets">
+            <End Role="Pallet" EntitySet="Pallets" />
+            <End Role="Carton" EntitySet="Cartons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GoodsReceiptDetails_Cartons" Association="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons">
+            <End Role="Carton" EntitySet="Cartons" />
+            <End Role="GoodsReceiptDetail" EntitySet="GoodsReceiptDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Packs_Cartons" Association="TotalSmartCodingModel.FK_Packs_Cartons">
+            <End Role="Carton" EntitySet="Cartons" />
+            <End Role="Pack" EntitySet="Packs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PickupDetails_Cartons" Association="TotalSmartCodingModel.FK_PickupDetails_Cartons">
+            <End Role="Carton" EntitySet="Cartons" />
+            <End Role="PickupDetail" EntitySet="PickupDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WarehouseAdjustmentDetails_Cartons" Association="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Cartons">
+            <End Role="Carton" EntitySet="Cartons" />
+            <End Role="WarehouseAdjustmentDetail" EntitySet="WarehouseAdjustmentDetails" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">
           <Property Type="Int32" Name="PickupID" Nullable="false" />
@@ -5727,12 +5727,12 @@
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="InActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Pickups" Relationship="TotalSmartCodingModel.FK_Pickups_FillingLines" FromRole="FillingLine" ToRole="Pickup" />
-          <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_FillingLines" FromRole="FillingLine" ToRole="Carton" />
           <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_FillingLines" FromRole="FillingLine" ToRole="Pack" />
           <Property Name="NickName" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
           <Property Name="PalletChanged" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_FillingLines" FromRole="FillingLine" ToRole="Batch" />
           <NavigationProperty Name="FillingLineDetails" Relationship="TotalSmartCodingModel.FK_FillingLineDetails_FillingLines" FromRole="FillingLine" ToRole="FillingLineDetail" />
+          <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_FillingLines" FromRole="FillingLine" ToRole="Carton" />
         </EntityType>
         <EntityType Name="GoodsReceiptType">
           <Key>
@@ -6304,35 +6304,6 @@
           <Property Type="String" Name="Code" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <EntityType Name="Carton">
-          <Key>
-            <PropertyRef Name="CartonID" />
-          </Key>
-          <Property Name="CartonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
-          <Property Name="BatchID" Type="Int32" Nullable="false" />
-          <Property Name="LocationID" Type="Int32" Nullable="false" />
-          <Property Name="CommodityID" Type="Int32" Nullable="false" />
-          <Property Name="PalletID" Type="Int32" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="LineVolume" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
-          <Property Name="PackCounts" Type="Int32" Nullable="false" />
-          <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Cartons_FillingLines" FromRole="Carton" ToRole="FillingLine" />
-          <NavigationProperty Name="Pallet" Relationship="TotalSmartCodingModel.FK_Cartons_Pallets" FromRole="Carton" ToRole="Pallet" />
-          <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_Cartons" FromRole="Carton" ToRole="Pack" />
-          <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Cartons" FromRole="Carton" ToRole="PickupDetail" />
-          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Cartons_Commodities" FromRole="Carton" ToRole="Commodity" />
-          <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" FromRole="Carton" ToRole="GoodsReceiptDetail" />
-          <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Cartons" FromRole="Carton" ToRole="WarehouseAdjustmentDetail" />
-          <Property Name="Label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SubmitStatusID" Type="Int32" Nullable="false" />
-          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CheckedID" Type="Int32" Nullable="false" />
-          <Property Name="CheckedDate" Type="DateTime" Precision="3" />
-        </EntityType>
         <EntityType Name="Pack">
           <Key>
             <PropertyRef Name="PackID" />
@@ -6348,13 +6319,13 @@
           <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LineVolume" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_Packs_Cartons" FromRole="Pack" ToRole="Carton" />
           <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Packs_FillingLines" FromRole="Pack" ToRole="FillingLine" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Packs" FromRole="Pack" ToRole="PickupDetail" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Packs_Commodities" FromRole="Pack" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Packs" FromRole="Pack" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Packs" FromRole="Pack" ToRole="WarehouseAdjustmentDetail" />
           <Property Name="Label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_Packs_Cartons" FromRole="Pack" ToRole="Carton" />
         </EntityType>
         <EntityType Name="Pallet">
           <Key>
@@ -6374,49 +6345,13 @@
           <Property Name="LineVolume" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="LineVolumePickup" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_Pallets" FromRole="Pallet" ToRole="Carton" />
           <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pallets" FromRole="Pallet" ToRole="PickupDetail" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Pallet" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Pallets" FromRole="Pallet" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Pallets" FromRole="Pallet" ToRole="WarehouseAdjustmentDetail" />
           <Property Name="Label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_Pallets" FromRole="Pallet" ToRole="Carton" />
         </EntityType>
-        <Association Name="FK_Cartons_FillingLines">
-          <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="FillingLine">
-              <PropertyRef Name="FillingLineID" />
-            </Principal>
-            <Dependent Role="Carton">
-              <PropertyRef Name="FillingLineID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Cartons_Pallets">
-          <End Type="TotalSmartCodingModel.Pallet" Role="Pallet" Multiplicity="0..1" />
-          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pallet">
-              <PropertyRef Name="PalletID" />
-            </Principal>
-            <Dependent Role="Carton">
-              <PropertyRef Name="PalletID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Packs_Cartons">
-          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
-          <End Type="TotalSmartCodingModel.Pack" Role="Pack" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carton">
-              <PropertyRef Name="CartonID" />
-            </Principal>
-            <Dependent Role="Pack">
-              <PropertyRef Name="CartonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Packs_FillingLines">
           <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
           <End Type="TotalSmartCodingModel.Pack" Role="Pack" Multiplicity="*" />
@@ -6455,7 +6390,6 @@
           <Property Name="LineVolumeReceipt" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Approved" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_PickupDetails_Cartons" FromRole="PickupDetail" ToRole="Carton" />
           <NavigationProperty Name="Pack" Relationship="TotalSmartCodingModel.FK_PickupDetails_Packs" FromRole="PickupDetail" ToRole="Pack" />
           <NavigationProperty Name="Pallet" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pallets" FromRole="PickupDetail" ToRole="Pallet" />
           <NavigationProperty Name="Pickup" Relationship="TotalSmartCodingModel.FK_PickupDetails_Pickups" FromRole="PickupDetail" ToRole="Pickup" />
@@ -6463,19 +6397,8 @@
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_PickupDetails_Commodities" FromRole="PickupDetail" ToRole="Commodity" />
           <NavigationProperty Name="BinLocation" Relationship="TotalSmartCodingModel.FK_PickupDetails_BinLocations" FromRole="PickupDetail" ToRole="BinLocation" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_PickupDetails" FromRole="PickupDetail" ToRole="GoodsReceiptDetail" />
+          <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_PickupDetails_Cartons" FromRole="PickupDetail" ToRole="Carton" />
         </EntityType>
-        <Association Name="FK_PickupDetails_Cartons">
-          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
-          <End Type="TotalSmartCodingModel.PickupDetail" Role="PickupDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carton">
-              <PropertyRef Name="CartonID" />
-            </Principal>
-            <Dependent Role="PickupDetail">
-              <PropertyRef Name="CartonID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_PickupDetails_Packs">
           <End Type="TotalSmartCodingModel.Pack" Role="Pack" Multiplicity="0..1" />
           <End Type="TotalSmartCodingModel.PickupDetail" Role="PickupDetail" Multiplicity="*" />
@@ -6695,7 +6618,6 @@
           <Property Name="Remarks" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="Discontinue" Type="Boolean" />
           <Property Name="InActive" Type="Boolean" />
-          <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_Commodities" FromRole="Commodity" ToRole="Carton" />
           <NavigationProperty Name="DeliveryAdviceDetails" Relationship="TotalSmartCodingModel.FK_DeliveryAdviceDetails_Commodities" FromRole="Commodity" ToRole="DeliveryAdviceDetail" />
           <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_Commodities" FromRole="Commodity" ToRole="Pack" />
           <NavigationProperty Name="Pallets" Relationship="TotalSmartCodingModel.FK_Pallets_Commodities" FromRole="Commodity" ToRole="Pallet" />
@@ -6710,19 +6632,8 @@
           <NavigationProperty Name="CommoditySettings" Relationship="TotalSmartCodingModel.FK_CommoditySettings_Commodities" FromRole="Commodity" ToRole="CommoditySetting" />
           <NavigationProperty Name="Batches" Relationship="TotalSmartCodingModel.FK_Batches_Commodities" FromRole="Commodity" ToRole="Batch" />
           <NavigationProperty Name="CommodityType" Relationship="TotalSmartCodingModel.FK_Commodities_CommodityTypes" FromRole="Commodity" ToRole="CommodityType" />
+          <NavigationProperty Name="Cartons" Relationship="TotalSmartCodingModel.FK_Cartons_Commodities" FromRole="Commodity" ToRole="Carton" />
         </EntityType>
-        <Association Name="FK_Cartons_Commodities">
-          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
-          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Commodity">
-              <PropertyRef Name="CommodityID" />
-            </Principal>
-            <Dependent Role="Carton">
-              <PropertyRef Name="CommodityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DeliveryAdviceDetails_Commodities">
           <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
           <End Type="TotalSmartCodingModel.DeliveryAdviceDetail" Role="DeliveryAdviceDetail" Multiplicity="*" />
@@ -7345,7 +7256,6 @@
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BinLocation" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_BinLocations" FromRole="GoodsReceiptDetail" ToRole="BinLocation" />
-          <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" FromRole="GoodsReceiptDetail" ToRole="Carton" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Commodities" FromRole="GoodsReceiptDetail" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceipt" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_GoodsReceipts" FromRole="GoodsReceiptDetail" ToRole="GoodsReceipt" />
           <NavigationProperty Name="Pack" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Packs" FromRole="GoodsReceiptDetail" ToRole="Pack" />
@@ -7363,6 +7273,7 @@
           <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" />
           <Property Name="PrimaryReferences" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="WarehouseAdjustmentTypeID" Type="Int32" />
+          <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" FromRole="GoodsReceiptDetail" ToRole="Carton" />
         </EntityType>
         <EntityType Name="GoodsReceipt">
           <Key>
@@ -7411,18 +7322,6 @@
             </Principal>
             <Dependent Role="GoodsReceiptDetail">
               <PropertyRef Name="BinLocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_GoodsReceiptDetails_Cartons">
-          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
-          <End Type="TotalSmartCodingModel.GoodsReceiptDetail" Role="GoodsReceiptDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carton">
-              <PropertyRef Name="CartonID" />
-            </Principal>
-            <Dependent Role="GoodsReceiptDetail">
-              <PropertyRef Name="CartonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -8070,7 +7969,6 @@
           <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Approved" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="BinLocation" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_BinLocations" FromRole="WarehouseAdjustmentDetail" ToRole="BinLocation" />
-          <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Cartons" FromRole="WarehouseAdjustmentDetail" ToRole="Carton" />
           <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Commodities" FromRole="WarehouseAdjustmentDetail" ToRole="Commodity" />
           <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_WarehouseAdjustmentDetails" FromRole="WarehouseAdjustmentDetail" ToRole="GoodsReceiptDetail" />
           <NavigationProperty Name="GoodsReceiptDetail" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_GoodsReceiptDetails" FromRole="WarehouseAdjustmentDetail" ToRole="GoodsReceiptDetail" />
@@ -8081,6 +7979,7 @@
           <NavigationProperty Name="Warehouse1" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Warehouses1" FromRole="WarehouseAdjustmentDetail" ToRole="Warehouse" />
           <Property Name="OrganizationalUnitID" Type="Int32" Nullable="false" />
           <Property Name="AdjustmentJobs" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Carton" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Cartons" FromRole="WarehouseAdjustmentDetail" ToRole="Carton" />
         </EntityType>
         <EntityType Name="WarehouseAdjustment">
           <Key>
@@ -8126,18 +8025,6 @@
             </Principal>
             <Dependent Role="WarehouseAdjustmentDetail">
               <PropertyRef Name="BinLocationID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_WarehouseAdjustmentDetails_Cartons">
-          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
-          <End Type="TotalSmartCodingModel.WarehouseAdjustmentDetail" Role="WarehouseAdjustmentDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Carton">
-              <PropertyRef Name="CartonID" />
-            </Principal>
-            <Dependent Role="WarehouseAdjustmentDetail">
-              <PropertyRef Name="CartonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9345,8 +9232,121 @@
           <Property Type="DateTime" Name="EntryDate" Nullable="true" />
           <Property Type="Int32" Name="UniqueCartonCounts" Nullable="false" />
           <Property Type="String" Name="CommodityOfficialCode" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="UniqueCheckedID" Nullable="false" />
+          <Property Type="Int32" Name="UniqueCheckedOut" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Carton">
+          <Key>
+            <PropertyRef Name="CartonID" />
+          </Key>
+          <Property Name="CartonID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntryDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FillingLineID" Type="Int32" Nullable="false" />
+          <Property Name="BatchID" Type="Int32" Nullable="false" />
+          <Property Name="LocationID" Type="Int32" Nullable="false" />
+          <Property Name="CommodityID" Type="Int32" Nullable="false" />
+          <Property Name="PalletID" Type="Int32" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Label" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="LineVolume" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="PackCounts" Type="Int32" Nullable="false" />
+          <Property Name="EntryStatusID" Type="Int32" Nullable="false" />
+          <Property Name="SubmitStatusID" Type="Int32" Nullable="false" />
+          <Property Name="CheckedOut" Type="Int32" Nullable="false" />
+          <Property Name="CheckedDate" Type="DateTime" Precision="3" />
+          <Property Name="Remarks" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Commodity" Relationship="TotalSmartCodingModel.FK_Cartons_Commodities" FromRole="Carton" ToRole="Commodity" />
+          <NavigationProperty Name="FillingLine" Relationship="TotalSmartCodingModel.FK_Cartons_FillingLines" FromRole="Carton" ToRole="FillingLine" />
+          <NavigationProperty Name="Pallet" Relationship="TotalSmartCodingModel.FK_Cartons_Pallets" FromRole="Carton" ToRole="Pallet" />
+          <NavigationProperty Name="GoodsReceiptDetails" Relationship="TotalSmartCodingModel.FK_GoodsReceiptDetails_Cartons" FromRole="Carton" ToRole="GoodsReceiptDetail" />
+          <NavigationProperty Name="Packs" Relationship="TotalSmartCodingModel.FK_Packs_Cartons" FromRole="Carton" ToRole="Pack" />
+          <NavigationProperty Name="PickupDetails" Relationship="TotalSmartCodingModel.FK_PickupDetails_Cartons" FromRole="Carton" ToRole="PickupDetail" />
+          <NavigationProperty Name="WarehouseAdjustmentDetails" Relationship="TotalSmartCodingModel.FK_WarehouseAdjustmentDetails_Cartons" FromRole="Carton" ToRole="WarehouseAdjustmentDetail" />
+        </EntityType>
+        <Association Name="FK_Cartons_Commodities">
+          <End Type="TotalSmartCodingModel.Commodity" Role="Commodity" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Commodity">
+              <PropertyRef Name="CommodityID" />
+            </Principal>
+            <Dependent Role="Carton">
+              <PropertyRef Name="CommodityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cartons_FillingLines">
+          <End Type="TotalSmartCodingModel.FillingLine" Role="FillingLine" Multiplicity="1" />
+          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FillingLine">
+              <PropertyRef Name="FillingLineID" />
+            </Principal>
+            <Dependent Role="Carton">
+              <PropertyRef Name="FillingLineID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cartons_Pallets">
+          <End Type="TotalSmartCodingModel.Pallet" Role="Pallet" Multiplicity="0..1" />
+          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pallet">
+              <PropertyRef Name="PalletID" />
+            </Principal>
+            <Dependent Role="Carton">
+              <PropertyRef Name="PalletID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GoodsReceiptDetails_Cartons">
+          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
+          <End Type="TotalSmartCodingModel.GoodsReceiptDetail" Role="GoodsReceiptDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carton">
+              <PropertyRef Name="CartonID" />
+            </Principal>
+            <Dependent Role="GoodsReceiptDetail">
+              <PropertyRef Name="CartonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Packs_Cartons">
+          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
+          <End Type="TotalSmartCodingModel.Pack" Role="Pack" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carton">
+              <PropertyRef Name="CartonID" />
+            </Principal>
+            <Dependent Role="Pack">
+              <PropertyRef Name="CartonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PickupDetails_Cartons">
+          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
+          <End Type="TotalSmartCodingModel.PickupDetail" Role="PickupDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carton">
+              <PropertyRef Name="CartonID" />
+            </Principal>
+            <Dependent Role="PickupDetail">
+              <PropertyRef Name="CartonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WarehouseAdjustmentDetails_Cartons">
+          <End Type="TotalSmartCodingModel.Carton" Role="Carton" Multiplicity="0..1" />
+          <End Type="TotalSmartCodingModel.WarehouseAdjustmentDetail" Role="WarehouseAdjustmentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carton">
+              <PropertyRef Name="CartonID" />
+            </Principal>
+            <Dependent Role="WarehouseAdjustmentDetail">
+              <PropertyRef Name="CartonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -10362,29 +10362,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="Cartons">
-            <EntityTypeMapping TypeName="TotalSmartCodingModel.Carton">
-              <MappingFragment StoreEntitySet="Cartons">
-                <ScalarProperty Name="CheckedDate" ColumnName="CheckedDate" />
-                <ScalarProperty Name="CheckedID" ColumnName="CheckedID" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-                <ScalarProperty Name="SubmitStatusID" ColumnName="SubmitStatusID" />
-                <ScalarProperty Name="Label" ColumnName="Label" />
-                <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
-                <ScalarProperty Name="PackCounts" ColumnName="PackCounts" />
-                <ScalarProperty Name="LineVolume" ColumnName="LineVolume" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="PalletID" ColumnName="PalletID" />
-                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
-                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
-                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
-                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
-                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
-                <ScalarProperty Name="CartonID" ColumnName="CartonID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Packs">
             <EntityTypeMapping TypeName="TotalSmartCodingModel.Pack">
               <MappingFragment StoreEntitySet="Packs">
@@ -12394,12 +12371,35 @@
                 <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
                 <ScalarProperty Name="UniqueCartonCounts" ColumnName="UniqueCartonCounts" />
                 <ScalarProperty Name="CommodityOfficialCode" ColumnName="CommodityOfficialCode" />
-                <ScalarProperty Name="UniqueCheckedID" ColumnName="UniqueCheckedID" />
+                <ScalarProperty Name="UniqueCheckedOut" ColumnName="UniqueCheckedOut" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="BatchExtraUpdate" FunctionName="TotalSmartCodingModel.Store.BatchExtraUpdate" />
           <FunctionImportMapping FunctionImportName="CartonChecked" FunctionName="TotalSmartCodingModel.Store.CartonChecked" />
+          <EntitySetMapping Name="Cartons">
+            <EntityTypeMapping TypeName="TotalSmartCodingModel.Carton">
+              <MappingFragment StoreEntitySet="Cartons">
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="CheckedDate" ColumnName="CheckedDate" />
+                <ScalarProperty Name="CheckedOut" ColumnName="CheckedOut" />
+                <ScalarProperty Name="SubmitStatusID" ColumnName="SubmitStatusID" />
+                <ScalarProperty Name="EntryStatusID" ColumnName="EntryStatusID" />
+                <ScalarProperty Name="PackCounts" ColumnName="PackCounts" />
+                <ScalarProperty Name="LineVolume" ColumnName="LineVolume" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="PalletID" ColumnName="PalletID" />
+                <ScalarProperty Name="CommodityID" ColumnName="CommodityID" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="BatchID" ColumnName="BatchID" />
+                <ScalarProperty Name="FillingLineID" ColumnName="FillingLineID" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="CartonID" ColumnName="CartonID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

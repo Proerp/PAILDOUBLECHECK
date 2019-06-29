@@ -58,7 +58,6 @@ namespace TotalModel.Models
         public Nullable<int> WarehouseAdjustmentTypeID { get; set; }
     
         public virtual BinLocation BinLocation { get; set; }
-        public virtual Carton Carton { get; set; }
         public virtual Commodity Commodity { get; set; }
         public virtual GoodsReceipt GoodsReceipt { get; set; }
         public virtual Pack Pack { get; set; }
@@ -71,5 +70,6 @@ namespace TotalModel.Models
         public virtual WarehouseAdjustmentDetail WarehouseAdjustmentDetail { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WarehouseAdjustmentDetail> WarehouseAdjustmentDetails { get; set; }
+        public virtual Carton Carton { get; set; }
     }
 }

@@ -50,7 +50,6 @@ namespace TotalModel.Models
         public string AdjustmentJobs { get; set; }
     
         public virtual BinLocation BinLocation { get; set; }
-        public virtual Carton Carton { get; set; }
         public virtual Commodity Commodity { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GoodsReceiptDetail> GoodsReceiptDetails { get; set; }
@@ -60,5 +59,6 @@ namespace TotalModel.Models
         public virtual WarehouseAdjustment WarehouseAdjustment { get; set; }
         public virtual Warehouse Warehouse { get; set; }
         public virtual Warehouse Warehouse1 { get; set; }
+        public virtual Carton Carton { get; set; }
     }
 }

@@ -37,7 +37,6 @@ namespace TotalModel.Models
         public virtual DbSet<Pickup> Pickups { get; set; }
         public virtual DbSet<SalesOrderDetail> SalesOrderDetails { get; set; }
         public virtual DbSet<WarehouseAdjustmentType> WarehouseAdjustmentTypes { get; set; }
-        public virtual DbSet<Carton> Cartons { get; set; }
         public virtual DbSet<Pack> Packs { get; set; }
         public virtual DbSet<Pallet> Pallets { get; set; }
         public virtual DbSet<PickupDetail> PickupDetails { get; set; }
@@ -80,6 +79,7 @@ namespace TotalModel.Models
         public virtual DbSet<UserGroupDetail> UserGroupDetails { get; set; }
         public virtual DbSet<CommodityType> CommodityTypes { get; set; }
         public virtual DbSet<Webapi> Webapis { get; set; }
+        public virtual DbSet<Carton> Cartons { get; set; }
     
         public virtual ObjectResult<Nullable<int>> GetAccessLevel(Nullable<int> userID, Nullable<int> nMVNTaskID, Nullable<int> organizationalUnitID)
         {
@@ -672,7 +672,7 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CartonUpdateEntryStatus", cartonIDsParameter, entryStatusIDParameter);
         }
     
-        public virtual ObjectResult<Carton> GetCartons(Nullable<int> fillingLineID, string entryStatusIDs, Nullable<int> palletID)
+        public virtual int GetCartons(Nullable<int> fillingLineID, string entryStatusIDs, Nullable<int> palletID)
         {
             var fillingLineIDParameter = fillingLineID.HasValue ?
                 new ObjectParameter("FillingLineID", fillingLineID) :
@@ -686,24 +686,7 @@ namespace TotalModel.Models
                 new ObjectParameter("PalletID", palletID) :
                 new ObjectParameter("PalletID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("GetCartons", fillingLineIDParameter, entryStatusIDsParameter, palletIDParameter);
-        }
-    
-        public virtual ObjectResult<Carton> GetCartons(Nullable<int> fillingLineID, string entryStatusIDs, Nullable<int> palletID, MergeOption mergeOption)
-        {
-            var fillingLineIDParameter = fillingLineID.HasValue ?
-                new ObjectParameter("FillingLineID", fillingLineID) :
-                new ObjectParameter("FillingLineID", typeof(int));
-    
-            var entryStatusIDsParameter = entryStatusIDs != null ?
-                new ObjectParameter("EntryStatusIDs", entryStatusIDs) :
-                new ObjectParameter("EntryStatusIDs", typeof(string));
-    
-            var palletIDParameter = palletID.HasValue ?
-                new ObjectParameter("PalletID", palletID) :
-                new ObjectParameter("PalletID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("GetCartons", mergeOption, fillingLineIDParameter, entryStatusIDsParameter, palletIDParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetCartons", fillingLineIDParameter, entryStatusIDsParameter, palletIDParameter);
         }
     
         public virtual ObjectResult<Pack> GetPacks(Nullable<int> fillingLineID, string entryStatusIDs, Nullable<int> cartonID)
@@ -1890,22 +1873,13 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ActiveUser>("GetActiveUsers", securityIdentifierParameter);
         }
     
-        public virtual ObjectResult<Carton> SearchCartons(string barcode)
+        public virtual int SearchCartons(string barcode)
         {
             var barcodeParameter = barcode != null ?
                 new ObjectParameter("Barcode", barcode) :
                 new ObjectParameter("Barcode", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("SearchCartons", barcodeParameter);
-        }
-    
-        public virtual ObjectResult<Carton> SearchCartons(string barcode, MergeOption mergeOption)
-        {
-            var barcodeParameter = barcode != null ?
-                new ObjectParameter("Barcode", barcode) :
-                new ObjectParameter("Barcode", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("SearchCartons", mergeOption, barcodeParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SearchCartons", barcodeParameter);
         }
     
         public virtual ObjectResult<Pack> SearchPacks(string barcode)

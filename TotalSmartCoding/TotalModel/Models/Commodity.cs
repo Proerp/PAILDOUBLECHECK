@@ -17,7 +17,6 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Commodity()
         {
-            this.Cartons = new HashSet<Carton>();
             this.DeliveryAdviceDetails = new HashSet<DeliveryAdviceDetail>();
             this.Packs = new HashSet<Pack>();
             this.Pallets = new HashSet<Pallet>();
@@ -30,6 +29,7 @@ namespace TotalModel.Models
             this.CommoditySettingDetails = new HashSet<CommoditySettingDetail>();
             this.CommoditySettings = new HashSet<CommoditySetting>();
             this.Batches = new HashSet<Batch>();
+            this.Cartons = new HashSet<Carton>();
         }
     
         public int CommodityID { get; set; }
@@ -54,8 +54,6 @@ namespace TotalModel.Models
         public Nullable<bool> Discontinue { get; set; }
         public Nullable<bool> InActive { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Carton> Cartons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeliveryAdviceDetail> DeliveryAdviceDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -82,5 +80,7 @@ namespace TotalModel.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Batch> Batches { get; set; }
         public virtual CommodityType CommodityType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Carton> Cartons { get; set; }
     }
 }
