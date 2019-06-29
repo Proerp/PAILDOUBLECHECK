@@ -37,6 +37,7 @@
             this.olvCommodityName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCartonCounts = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvUniqueCartonCounts = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvUniqueCheckedOut = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelMaster = new System.Windows.Forms.Panel();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.panelBottomLeft = new System.Windows.Forms.Panel();
@@ -47,6 +48,7 @@
             this.buttonClearFilters = new System.Windows.Forms.ToolStripButton();
             this.dateTimexUpperFillterDate = new CustomControls.DateTimexPicker();
             this.dateTimexLowerFillterDate = new CustomControls.DateTimexPicker();
+            this.olvUniqueCheckedYet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.fastBatchSumups)).BeginInit();
             this.panelMaster.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -65,6 +67,8 @@
             this.fastBatchSumups.AllColumns.Add(this.olvCommodityName);
             this.fastBatchSumups.AllColumns.Add(this.olvCartonCounts);
             this.fastBatchSumups.AllColumns.Add(this.olvUniqueCartonCounts);
+            this.fastBatchSumups.AllColumns.Add(this.olvUniqueCheckedOut);
+            this.fastBatchSumups.AllColumns.Add(this.olvUniqueCheckedYet);
             this.fastBatchSumups.CheckedAspectName = "";
             this.fastBatchSumups.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvPalletSelected,
@@ -74,7 +78,9 @@
             this.olvCommodityOfficialCode,
             this.olvCommodityName,
             this.olvCartonCounts,
-            this.olvUniqueCartonCounts});
+            this.olvUniqueCartonCounts,
+            this.olvUniqueCheckedOut,
+            this.olvUniqueCheckedYet});
             this.fastBatchSumups.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastBatchSumups.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fastBatchSumups.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -88,7 +94,7 @@
             this.fastBatchSumups.RowHeight = 36;
             this.fastBatchSumups.ShowGroups = false;
             this.fastBatchSumups.ShowImagesOnSubItems = true;
-            this.fastBatchSumups.Size = new System.Drawing.Size(924, 445);
+            this.fastBatchSumups.Size = new System.Drawing.Size(1073, 445);
             this.fastBatchSumups.TabIndex = 69;
             this.fastBatchSumups.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBatchSumups.UseCompatibleStateImageBehavior = false;
@@ -143,7 +149,7 @@
             this.olvCartonCounts.AspectName = "CartonCounts";
             this.olvCartonCounts.AspectToStringFormat = "{0:#,#}";
             this.olvCartonCounts.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvCartonCounts.Text = "Include duplicate labels";
+            this.olvCartonCounts.Text = "Include duplicated labels";
             this.olvCartonCounts.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvCartonCounts.Width = 153;
             // 
@@ -151,11 +157,18 @@
             // 
             this.olvUniqueCartonCounts.AspectName = "UniqueCartonCounts";
             this.olvUniqueCartonCounts.AspectToStringFormat = "{0:#,#}";
-            this.olvUniqueCartonCounts.FillsFreeSpace = true;
             this.olvUniqueCartonCounts.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvUniqueCartonCounts.Text = "Unique labels";
             this.olvUniqueCartonCounts.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvUniqueCartonCounts.Width = 90;
+            // 
+            // olvUniqueCheckedOut
+            // 
+            this.olvUniqueCheckedOut.AspectName = "UniqueCheckedOut";
+            this.olvUniqueCheckedOut.AspectToStringFormat = "{0:#,#}";
+            this.olvUniqueCheckedOut.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvUniqueCheckedOut.Text = "Checked";
+            this.olvUniqueCheckedOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // panelMaster
             // 
@@ -165,7 +178,7 @@
             this.panelMaster.Location = new System.Drawing.Point(0, 45);
             this.panelMaster.Margin = new System.Windows.Forms.Padding(2);
             this.panelMaster.Name = "panelMaster";
-            this.panelMaster.Size = new System.Drawing.Size(924, 445);
+            this.panelMaster.Size = new System.Drawing.Size(1073, 445);
             this.panelMaster.TabIndex = 71;
             // 
             // panelBottom
@@ -175,7 +188,7 @@
             this.panelBottom.Location = new System.Drawing.Point(0, 0);
             this.panelBottom.Margin = new System.Windows.Forms.Padding(2);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(924, 45);
+            this.panelBottom.Size = new System.Drawing.Size(1073, 45);
             this.panelBottom.TabIndex = 72;
             // 
             // panelBottomLeft
@@ -186,7 +199,7 @@
             this.panelBottomLeft.Margin = new System.Windows.Forms.Padding(2);
             this.panelBottomLeft.Name = "panelBottomLeft";
             this.panelBottomLeft.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.panelBottomLeft.Size = new System.Drawing.Size(924, 45);
+            this.panelBottomLeft.Size = new System.Drawing.Size(1073, 45);
             this.panelBottomLeft.TabIndex = 1;
             // 
             // layoutTop
@@ -204,7 +217,7 @@
             this.layoutTop.Controls.Add(this.dateTimexLowerFillterDate, 3, 0);
             this.layoutTop.Dock = System.Windows.Forms.DockStyle.Right;
             this.layoutTop.Font = new System.Drawing.Font("Calibri", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.layoutTop.Location = new System.Drawing.Point(337, 0);
+            this.layoutTop.Location = new System.Drawing.Point(486, 0);
             this.layoutTop.Margin = new System.Windows.Forms.Padding(0);
             this.layoutTop.Name = "layoutTop";
             this.layoutTop.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -290,11 +303,21 @@
             this.dateTimexLowerFillterDate.Size = new System.Drawing.Size(118, 24);
             this.dateTimexLowerFillterDate.TabIndex = 90;
             // 
+            // olvUniqueCheckedYet
+            // 
+            this.olvUniqueCheckedYet.AspectName = "UniqueCheckedYet";
+            this.olvUniqueCheckedYet.AspectToStringFormat = "{0:#,#}";
+            this.olvUniqueCheckedYet.FillsFreeSpace = true;
+            this.olvUniqueCheckedYet.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvUniqueCheckedYet.Text = "NOT Checked";
+            this.olvUniqueCheckedYet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvUniqueCheckedYet.Width = 90;
+            // 
             // BatchSumups
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 490);
+            this.ClientSize = new System.Drawing.Size(1073, 490);
             this.Controls.Add(this.panelMaster);
             this.Controls.Add(this.panelBottom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -339,5 +362,7 @@
         private BrightIdeasSoftware.OLVColumn olvEntryDate;
         private BrightIdeasSoftware.OLVColumn olvBatchCode;
         private BrightIdeasSoftware.OLVColumn olvCommodityOfficialCode;
+        private BrightIdeasSoftware.OLVColumn olvUniqueCheckedOut;
+        private BrightIdeasSoftware.OLVColumn olvUniqueCheckedYet;
     }
 }

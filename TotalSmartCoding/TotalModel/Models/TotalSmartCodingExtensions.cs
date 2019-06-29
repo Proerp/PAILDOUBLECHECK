@@ -895,7 +895,7 @@ namespace TotalModel.Models
 
     public partial class BatchSumup
     {
-        public decimal a { get { return this.UniqueCartonCounts - this.UniqueCheckedID; } }
+        public int UniqueCheckedYet { get { return this.UniqueCartonCounts - this.UniqueCheckedOut; } }
     }
 
     public partial class Pack : IPrimitiveEntity, IBaseEntity

@@ -4098,7 +4098,7 @@
             <Parameter Name="CartonIDs" Mode="In" Type="String" />
             <Parameter Name="EntryStatusID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetCartons">
+          <FunctionImport Name="GetCartons" EntitySet="Cartons" ReturnType="Collection(TotalSmartCodingModel.Carton)">
             <Parameter Name="FillingLineID" Mode="In" Type="Int32" />
             <Parameter Name="EntryStatusIDs" Mode="In" Type="String" />
             <Parameter Name="PalletID" Mode="In" Type="Int32" />
@@ -4776,7 +4776,7 @@
             <End Role="Warehouse" EntitySet="Warehouses" />
             <End Role="WarehouseAdjustment" EntitySet="WarehouseAdjustments" />
           </AssociationSet>
-          <FunctionImport Name="SearchCartons">
+          <FunctionImport Name="SearchCartons" EntitySet="Cartons" ReturnType="Collection(TotalSmartCodingModel.Carton)">
           <Parameter Name="Barcode" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SearchPacks" EntitySet="Packs" ReturnType="Collection(TotalSmartCodingModel.Pack)">
