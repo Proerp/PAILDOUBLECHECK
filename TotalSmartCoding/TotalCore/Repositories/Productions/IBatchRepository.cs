@@ -21,5 +21,6 @@ namespace TotalCore.Repositories.Productions
         List<BatchAvailable> GetBatchAvailables(int? locationID, int? deliveryAdviceID, int? transferOrderID, int? commodityID, bool withNullRow);
 
         List<BatchSumup> GetBatchSumups(DateTime fromDate, DateTime toDate, string entryStatusIDs);
+        List<Carton> GetCartonCheckedOuts(int batchID, bool doubleChecked);
     }
 }

@@ -76,6 +76,11 @@ namespace TotalDAL.Repositories.Productions
         {
             return base.TotalSmartCodingEntities.GetBatchSumups(fromDate, toDate, entryStatusIDs).ToList();
         }
+
+        public List<Carton> GetCartonCheckedOuts(int batchID, bool doubleChecked)
+        {
+            return this.TotalSmartCodingEntities.GetCartonCheckedOuts(batchID, doubleChecked).ToList();
+        }
     }
 
 

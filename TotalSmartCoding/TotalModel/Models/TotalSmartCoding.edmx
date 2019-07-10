@@ -2649,7 +2649,7 @@
         </Function>
         <Function Name="GetCartonCheckedOuts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BatchID" Type="int" Mode="In" />
-          <Parameter Name="Checked" Type="bit" Mode="In" />
+          <Parameter Name="DoubleChecked" Type="bit" Mode="In" />
         </Function>
         <Function Name="GetCartons" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="FillingLineID" Type="int" Mode="In" />
@@ -5437,7 +5437,7 @@
           </AssociationSet>
           <FunctionImport Name="GetCartonCheckedOuts" EntitySet="Cartons" ReturnType="Collection(TotalSmartCodingModel.Carton)">
             <Parameter Name="BatchID" Mode="In" Type="Int32" />
-            <Parameter Name="Checked" Mode="In" Type="Boolean" />
+            <Parameter Name="DoubleChecked" Mode="In" Type="Boolean" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="PendingPickupDetail">

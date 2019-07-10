@@ -3554,30 +3554,30 @@ namespace TotalModel.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CartonChecked", batchIDParameter, labelParameter);
         }
     
-        public virtual ObjectResult<Carton> GetCartonCheckedOuts(Nullable<int> batchID, Nullable<bool> @checked)
+        public virtual ObjectResult<Carton> GetCartonCheckedOuts(Nullable<int> batchID, Nullable<bool> doubleChecked)
         {
             var batchIDParameter = batchID.HasValue ?
                 new ObjectParameter("BatchID", batchID) :
                 new ObjectParameter("BatchID", typeof(int));
     
-            var checkedParameter = @checked.HasValue ?
-                new ObjectParameter("Checked", @checked) :
-                new ObjectParameter("Checked", typeof(bool));
+            var doubleCheckedParameter = doubleChecked.HasValue ?
+                new ObjectParameter("DoubleChecked", doubleChecked) :
+                new ObjectParameter("DoubleChecked", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("GetCartonCheckedOuts", batchIDParameter, checkedParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("GetCartonCheckedOuts", batchIDParameter, doubleCheckedParameter);
         }
     
-        public virtual ObjectResult<Carton> GetCartonCheckedOuts(Nullable<int> batchID, Nullable<bool> @checked, MergeOption mergeOption)
+        public virtual ObjectResult<Carton> GetCartonCheckedOuts(Nullable<int> batchID, Nullable<bool> doubleChecked, MergeOption mergeOption)
         {
             var batchIDParameter = batchID.HasValue ?
                 new ObjectParameter("BatchID", batchID) :
                 new ObjectParameter("BatchID", typeof(int));
     
-            var checkedParameter = @checked.HasValue ?
-                new ObjectParameter("Checked", @checked) :
-                new ObjectParameter("Checked", typeof(bool));
+            var doubleCheckedParameter = doubleChecked.HasValue ?
+                new ObjectParameter("DoubleChecked", doubleChecked) :
+                new ObjectParameter("DoubleChecked", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("GetCartonCheckedOuts", mergeOption, batchIDParameter, checkedParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("GetCartonCheckedOuts", mergeOption, batchIDParameter, doubleCheckedParameter);
         }
     }
 }

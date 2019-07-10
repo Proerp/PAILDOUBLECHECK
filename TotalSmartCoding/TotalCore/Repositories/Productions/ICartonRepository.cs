@@ -8,7 +8,6 @@ namespace TotalCore.Repositories.Productions
     public interface ICartonRepository : IGenericRepository<Carton>
     {
         IList<Carton> GetCartons(GlobalVariables.FillingLine fillingLineID, string entryStatusIDs, int? palletID);
-        //IList<Carton> GetCartonCheckedOuts(int batchID, bool doubleChecked);
         IList<CartonAttribute> GetCartonAttributes(GlobalVariables.FillingLine fillingLineID, string submitStatusIDs, int? palletID);
         IList<Carton> SearchCartons(string barcode);
 

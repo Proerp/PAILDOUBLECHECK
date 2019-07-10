@@ -59,5 +59,10 @@ namespace TotalSmartCoding.Controllers.APIs.Productions
         {
             return this.batchAPIRepository.GetBatchSumups(fromDate, toDate, entryStatusIDs);
         }
+
+        public List<Carton> GetCartonCheckedOuts(int batchID, bool boubleChecked)
+        {
+            return this.batchAPIRepository.GetCartonCheckedOuts(batchID, boubleChecked);
+        }
     }
 }
