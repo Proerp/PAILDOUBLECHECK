@@ -113,7 +113,7 @@ namespace TotalSmartCoding.Views.Productions
                 this.textBatchCartonNo.TextBox.DataBindings.Add("Text", this.fillingData, "BatchCartonNo");
                 this.textFinalCartonNo.TextBox.DataBindings.Add("Text", this.fillingData, "FinalCartonNo");
                 this.textNextPalletNo.TextBox.DataBindings.Add("Text", this.fillingData, "NextPalletNo");
-                
+
 
                 this.textNthCartontoZebra.TextBox.DataBindings.Add("Text", this.fillingData, "NthCartontoZebra", true, DataSourceUpdateMode.OnPropertyChanged);
 
@@ -142,7 +142,7 @@ namespace TotalSmartCoding.Views.Productions
 
         private void fillingData_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "BatchID" && this.fillingData != null && this.fillingData.BatchID > 0 )
+            if (e.PropertyName == "BatchID" && this.fillingData != null && this.fillingData.BatchID > 0)
                 this.scannerController.Initialize();
         }
 
@@ -615,7 +615,7 @@ namespace TotalSmartCoding.Views.Productions
                     if (e.PropertyName == "LedStatus") { this.scannerLEDGreen.Enabled = this.scannerController.LedGreenOn; this.scannerLEDAmber.Enabled = this.scannerController.LedAmberOn; this.scannerLEDRed.Enabled = this.scannerController.LedRedOn; if (this.scannerController.LedRedOn) { GlobalEnums.IOAlarm = true; this.StopPrint(); } return; }
 
                     if (e.PropertyName == "LedMCU") { this.toolStripMCUQuanlity.Enabled = this.scannerController.LedMCUQualityOn; this.toolStripMCUMatching.Enabled = this.scannerController.LedMCUMatchingOn; this.toolStripMCUCarton.Enabled = this.scannerController.LedMCUCartonOn; return; }
-                    
+
                     if (e.PropertyName == "BatchCartonNo") { this.fillingData.BatchCartonNo = this.scannerController.BatchCartonNo; return; }
 
 
@@ -866,7 +866,7 @@ namespace TotalSmartCoding.Views.Productions
             try
             {
                 string cellValue = "";
-                if (CustomInputBox.Show("BP Filling System", "Please input pack number", ref cellValue) == System.Windows.Forms.DialogResult.OK)
+                if (CustomInputBox.Show("BP Filling System", "Please input pack number", false, ref cellValue) == System.Windows.Forms.DialogResult.OK)
                 {
                     for (int rowIndex = 0; rowIndex < this.dgvPackQueue.Rows.Count; rowIndex++)
                     {
@@ -946,10 +946,16 @@ namespace TotalSmartCoding.Views.Productions
                 DataGridView dataGridView = sender.Equals(this.buttonRemoveCarton) ? this.dgvCartonQueue : this.dgvCartonsetQueue;
                 if (dataGridView != null && dataGridView.CurrentCell != null)
                 {
-                    string selectedBarcode = "";
+                    string selectedBarcode = ""; string cellValue = "";
                     int barcodeID = this.getBarcodeID(dataGridView.CurrentCell, out selectedBarcode);
                     if (barcodeID > 0 && CustomMsgBox.Show(this, "Are you sure you want to remove this carton:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
-                        if (this.scannerController.MoveCartonToPendingQueue(barcodeID, dataGridView.Equals(this.dgvCartonsetQueue), true)) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (CustomInputBox.Show("Password", "Please input password", true, ref cellValue) == System.Windows.Forms.DialogResult.OK)
+                            if (cellValue == "9876543210")
+                            {
+                                if (this.scannerController.MoveCartonToPendingQueue(barcodeID, dataGridView.Equals(this.dgvCartonsetQueue), true)) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                                CustomMsgBox.Show(this, "Sorry, wrong password!", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception exception)
