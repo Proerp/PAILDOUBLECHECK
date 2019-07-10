@@ -23,6 +23,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             this.CartonEditable();
 
             this.GetCartons();
+            this.GetCartonCheckedOuts();
             this.GetCartonAttributes();
 
             this.CartonUpdateEntryStatus();
@@ -108,6 +109,22 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + "       END " + "\r\n";
 
             this.totalSmartCodingEntities.CreateStoredProcedure("GetCartons", queryString);
+        }
+
+        private void GetCartonCheckedOuts()
+        {
+            string sqlSelect = "       SELECT * FROM Cartons WHERE BatchID = @BatchID AND EntryStatusID IN (" + (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Wrapped + ") " + "\r\n";
+
+            string queryString = " @BatchID int, @DoubleChecked bit " + "\r\n";
+            queryString = queryString + " WITH ENCRYPTION " + "\r\n";
+            queryString = queryString + " AS " + "\r\n";
+
+            queryString = queryString + "   IF (@DoubleChecked = 0) " + "\r\n";
+            queryString = queryString + "       " + sqlSelect + " AND CheckedOut = 0 " + "\r\n";
+            queryString = queryString + "   ELSE " + "\r\n";
+            queryString = queryString + "       " + sqlSelect + " AND CheckedOut <> 0 " + "\r\n";
+            
+            this.totalSmartCodingEntities.CreateStoredProcedure("GetCartonCheckedOuts", queryString);
         }
 
         private void GetCartonAttributes()

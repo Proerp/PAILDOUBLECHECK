@@ -3553,5 +3553,31 @@ namespace TotalModel.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("CartonChecked", batchIDParameter, labelParameter);
         }
+    
+        public virtual ObjectResult<Carton> GetCartonCheckedOuts(Nullable<int> batchID, Nullable<bool> @checked)
+        {
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
+    
+            var checkedParameter = @checked.HasValue ?
+                new ObjectParameter("Checked", @checked) :
+                new ObjectParameter("Checked", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("GetCartonCheckedOuts", batchIDParameter, checkedParameter);
+        }
+    
+        public virtual ObjectResult<Carton> GetCartonCheckedOuts(Nullable<int> batchID, Nullable<bool> @checked, MergeOption mergeOption)
+        {
+            var batchIDParameter = batchID.HasValue ?
+                new ObjectParameter("BatchID", batchID) :
+                new ObjectParameter("BatchID", typeof(int));
+    
+            var checkedParameter = @checked.HasValue ?
+                new ObjectParameter("Checked", @checked) :
+                new ObjectParameter("Checked", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Carton>("GetCartonCheckedOuts", mergeOption, batchIDParameter, checkedParameter);
+        }
     }
 }
