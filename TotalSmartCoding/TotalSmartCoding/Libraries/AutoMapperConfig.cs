@@ -103,16 +103,19 @@ namespace TotalSmartCoding.Libraries
 
                 cfg.CreateMap<Pack, PackViewModel>();
                 cfg.CreateMap<Pack, PackDTO>();
+                cfg.CreateMap<Pack, BarcodeDTO>();
                 cfg.CreateMap<PackPrimitiveDTO, Pack>();
 
 
                 cfg.CreateMap<Carton, CartonViewModel>();
                 cfg.CreateMap<Carton, CartonDTO>();
+                cfg.CreateMap<Carton, BarcodeDTO>();
                 cfg.CreateMap<CartonPrimitiveDTO, Carton>();
                 cfg.CreateMap<CartonAttribute, CartonDTO>();
 
                 cfg.CreateMap<Pallet, PalletViewModel>();
                 cfg.CreateMap<Pallet, PalletDTO>();
+                cfg.CreateMap<Pallet, BarcodeDTO>();
                 cfg.CreateMap<PalletPrimitiveDTO, Pallet>();
 
 

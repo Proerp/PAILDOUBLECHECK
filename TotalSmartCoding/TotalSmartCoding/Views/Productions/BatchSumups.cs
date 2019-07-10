@@ -6,10 +6,13 @@ using System.Linq;
 using BrightIdeasSoftware;
 
 using Ninject;
+using AutoMapper;
 
+using TotalBase;
 using TotalBase.Enums;
 using TotalModel.Models;
 using TotalDTO.Sales;
+using TotalDTO.Productions;
 using TotalSmartCoding.Controllers.APIs.Sales;
 using TotalSmartCoding.Libraries;
 using TotalSmartCoding.Libraries.Helpers;
@@ -18,7 +21,6 @@ using TotalSmartCoding.Views.Mains;
 using TotalDTO.Helpers.Interfaces;
 using TotalSmartCoding.Controllers.APIs.Productions;
 using TotalCore.Repositories.Productions;
-using TotalBase;
 
 
 namespace TotalSmartCoding.Views.Productions
@@ -101,7 +103,35 @@ namespace TotalSmartCoding.Views.Productions
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            this.BatchSumups_Load(this, new EventArgs()); 
+            this.BatchSumups_Load(this, new EventArgs());
+        }
+
+        private void fastBatchSumups_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.fastBatchSumups.SelectedObject != null)
+                {
+                    BatchSumup batchSumup = this.fastBatchSumups.SelectedObject as BatchSumup;
+                    if (batchSumup != null)
+                    {
+                        IList<BarcodeDTO> barcodeList = new List<BarcodeDTO>();
+                        IList<Carton> cartons = this.batchAPIs.GetCartonCheckedOuts(batchSumup.BatchID, false);
+
+                        if (cartons.Count > 0)
+                        {
+                            Mapper.Map<IList<Carton>, IList<BarcodeDTO>>(cartons, barcodeList);
+
+                            QuickView quickView = new QuickView(barcodeList, barcodeList.Count.ToString("N0") + " carton" + (barcodeList.Count > 1 ? "s" : "") + " NOT checked of batch: " + batchSumup.BatchCode);
+                            quickView.ShowDialog(); quickView.Dispose();
+                        }
+                    }
+                }
+            }
+            catch (Exception exception)
+            {
+                ExceptionHandlers.ShowExceptionMessageBox(this, exception);
+            }
         }
     }
 }

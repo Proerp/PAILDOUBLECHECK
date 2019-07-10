@@ -38,6 +38,7 @@
             this.olvCartonCounts = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvUniqueCartonCounts = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvUniqueCheckedOut = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvUniqueCheckedYet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.panelMaster = new System.Windows.Forms.Panel();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.panelBottomLeft = new System.Windows.Forms.Panel();
@@ -48,7 +49,6 @@
             this.buttonClearFilters = new System.Windows.Forms.ToolStripButton();
             this.dateTimexUpperFillterDate = new CustomControls.DateTimexPicker();
             this.dateTimexLowerFillterDate = new CustomControls.DateTimexPicker();
-            this.olvUniqueCheckedYet = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.fastBatchSumups)).BeginInit();
             this.panelMaster.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -101,6 +101,7 @@
             this.fastBatchSumups.UseFiltering = true;
             this.fastBatchSumups.View = System.Windows.Forms.View.Details;
             this.fastBatchSumups.VirtualMode = true;
+            this.fastBatchSumups.DoubleClick += new System.EventHandler(this.fastBatchSumups_DoubleClick);
             // 
             // olvPalletSelected
             // 
@@ -169,6 +170,16 @@
             this.olvUniqueCheckedOut.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.olvUniqueCheckedOut.Text = "Checked";
             this.olvUniqueCheckedOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // olvUniqueCheckedYet
+            // 
+            this.olvUniqueCheckedYet.AspectName = "UniqueCheckedYet";
+            this.olvUniqueCheckedYet.AspectToStringFormat = "{0:#,#}";
+            this.olvUniqueCheckedYet.FillsFreeSpace = true;
+            this.olvUniqueCheckedYet.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvUniqueCheckedYet.Text = "NOT Checked";
+            this.olvUniqueCheckedYet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.olvUniqueCheckedYet.Width = 90;
             // 
             // panelMaster
             // 
@@ -302,16 +313,6 @@
             this.dateTimexLowerFillterDate.ReadOnly = false;
             this.dateTimexLowerFillterDate.Size = new System.Drawing.Size(118, 24);
             this.dateTimexLowerFillterDate.TabIndex = 90;
-            // 
-            // olvUniqueCheckedYet
-            // 
-            this.olvUniqueCheckedYet.AspectName = "UniqueCheckedYet";
-            this.olvUniqueCheckedYet.AspectToStringFormat = "{0:#,#}";
-            this.olvUniqueCheckedYet.FillsFreeSpace = true;
-            this.olvUniqueCheckedYet.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvUniqueCheckedYet.Text = "NOT Checked";
-            this.olvUniqueCheckedYet.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.olvUniqueCheckedYet.Width = 90;
             // 
             // BatchSumups
             // 
