@@ -43,6 +43,9 @@
             this.panelCenter = new System.Windows.Forms.Panel();
             this.textFilterPallet = new System.Windows.Forms.TextBox();
             this.textFilterCarton = new System.Windows.Forms.TextBox();
+            this.olvPackCheckedOut = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvCartonCheckedOut = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvPalletCheckedOut = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.fastPacks)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -54,20 +57,23 @@
             // fastPacks
             // 
             this.fastPacks.AllColumns.Add(this.olvColumn1);
+            this.fastPacks.AllColumns.Add(this.olvPackCheckedOut);
             this.fastPacks.AllColumns.Add(this.olvPackCode);
             this.fastPacks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
+            this.olvPackCheckedOut,
             this.olvPackCode});
             this.fastPacks.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastPacks.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fastPacks.FullRowSelect = true;
             this.fastPacks.HideSelection = false;
             this.fastPacks.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPacks.Location = new System.Drawing.Point(3, 3);
+            this.fastPacks.Location = new System.Drawing.Point(2, 2);
+            this.fastPacks.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fastPacks.Name = "fastPacks";
             this.fastPacks.OwnerDraw = true;
             this.fastPacks.ShowGroups = false;
-            this.fastPacks.Size = new System.Drawing.Size(289, 220);
+            this.fastPacks.Size = new System.Drawing.Size(218, 180);
             this.fastPacks.TabIndex = 71;
             this.fastPacks.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastPacks.UseCompatibleStateImageBehavior = false;
@@ -98,9 +104,10 @@
             // 
             this.textFilterPack.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textFilterPack.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.textFilterPack.Location = new System.Drawing.Point(325, 12);
+            this.textFilterPack.Location = new System.Drawing.Point(244, 10);
+            this.textFilterPack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textFilterPack.Name = "textFilterPack";
-            this.textFilterPack.Size = new System.Drawing.Size(215, 27);
+            this.textFilterPack.Size = new System.Drawing.Size(162, 23);
             this.textFilterPack.TabIndex = 72;
             this.textFilterPack.Text = "Enter any text here to search ...";
             this.textFilterPack.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -113,36 +120,41 @@
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(97, 823);
+            this.panel1.Size = new System.Drawing.Size(73, 609);
             this.panel1.TabIndex = 73;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::TotalSmartCoding.Properties.Resources.Search_barcode_32;
-            this.pictureBox1.Location = new System.Drawing.Point(21, 27);
+            this.pictureBox1.Location = new System.Drawing.Point(16, 22);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(48, 48);
+            this.pictureBox1.Size = new System.Drawing.Size(36, 39);
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
             // fastCartons
             // 
             this.fastCartons.AllColumns.Add(this.olvColumn2);
+            this.fastCartons.AllColumns.Add(this.olvCartonCheckedOut);
             this.fastCartons.AllColumns.Add(this.olvCartonCode);
             this.fastCartons.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn2,
+            this.olvCartonCheckedOut,
             this.olvCartonCode});
             this.fastCartons.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastCartons.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fastCartons.FullRowSelect = true;
             this.fastCartons.HideSelection = false;
             this.fastCartons.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastCartons.Location = new System.Drawing.Point(0, 239);
+            this.fastCartons.Location = new System.Drawing.Point(0, 194);
+            this.fastCartons.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fastCartons.Name = "fastCartons";
             this.fastCartons.OwnerDraw = true;
             this.fastCartons.ShowGroups = false;
-            this.fastCartons.Size = new System.Drawing.Size(292, 173);
+            this.fastCartons.Size = new System.Drawing.Size(220, 141);
             this.fastCartons.TabIndex = 74;
             this.fastCartons.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastCartons.UseCompatibleStateImageBehavior = false;
@@ -174,20 +186,23 @@
             // fastPallets
             // 
             this.fastPallets.AllColumns.Add(this.olvColumn4);
+            this.fastPallets.AllColumns.Add(this.olvPalletCheckedOut);
             this.fastPallets.AllColumns.Add(this.olvPalletCode);
             this.fastPallets.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn4,
+            this.olvPalletCheckedOut,
             this.olvPalletCode});
             this.fastPallets.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastPallets.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.fastPallets.FullRowSelect = true;
             this.fastPallets.HideSelection = false;
             this.fastPallets.HighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
-            this.fastPallets.Location = new System.Drawing.Point(0, 429);
+            this.fastPallets.Location = new System.Drawing.Point(0, 349);
+            this.fastPallets.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.fastPallets.Name = "fastPallets";
             this.fastPallets.OwnerDraw = true;
             this.fastPallets.ShowGroups = false;
-            this.fastPallets.Size = new System.Drawing.Size(289, 151);
+            this.fastPallets.Size = new System.Drawing.Size(218, 123);
             this.fastPallets.TabIndex = 75;
             this.fastPallets.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastPallets.UseCompatibleStateImageBehavior = false;
@@ -224,18 +239,20 @@
             this.panelCenter.Controls.Add(this.fastPallets);
             this.panelCenter.Controls.Add(this.fastCartons);
             this.panelCenter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelCenter.Location = new System.Drawing.Point(97, 0);
+            this.panelCenter.Location = new System.Drawing.Point(73, 0);
+            this.panelCenter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panelCenter.Name = "panelCenter";
-            this.panelCenter.Size = new System.Drawing.Size(663, 823);
+            this.panelCenter.Size = new System.Drawing.Size(538, 609);
             this.panelCenter.TabIndex = 76;
             // 
             // textFilterPallet
             // 
             this.textFilterPallet.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textFilterPallet.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.textFilterPallet.Location = new System.Drawing.Point(325, 110);
+            this.textFilterPallet.Location = new System.Drawing.Point(244, 89);
+            this.textFilterPallet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textFilterPallet.Name = "textFilterPallet";
-            this.textFilterPallet.Size = new System.Drawing.Size(215, 27);
+            this.textFilterPallet.Size = new System.Drawing.Size(162, 23);
             this.textFilterPallet.TabIndex = 77;
             this.textFilterPallet.Text = "Enter any text here to search ...";
             this.textFilterPallet.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -247,9 +264,10 @@
             // 
             this.textFilterCarton.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textFilterCarton.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.textFilterCarton.Location = new System.Drawing.Point(325, 60);
+            this.textFilterCarton.Location = new System.Drawing.Point(244, 49);
+            this.textFilterCarton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textFilterCarton.Name = "textFilterCarton";
-            this.textFilterCarton.Size = new System.Drawing.Size(215, 27);
+            this.textFilterCarton.Size = new System.Drawing.Size(162, 23);
             this.textFilterCarton.TabIndex = 76;
             this.textFilterCarton.Text = "Enter any text here to search ...";
             this.textFilterCarton.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -257,14 +275,39 @@
             this.textFilterCarton.Enter += new System.EventHandler(this.textFilter_Enter);
             this.textFilterCarton.Leave += new System.EventHandler(this.textFilter_Leave);
             // 
+            // olvPackCheckedOut
+            // 
+            this.olvPackCheckedOut.AspectName = "DoubleChecked";
+            this.olvPackCheckedOut.CheckBoxes = true;
+            this.olvPackCheckedOut.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvPackCheckedOut.Text = "Checked";
+            this.olvPackCheckedOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // olvCartonCheckedOut
+            // 
+            this.olvCartonCheckedOut.AspectName = "DoubleChecked";
+            this.olvCartonCheckedOut.CheckBoxes = true;
+            this.olvCartonCheckedOut.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCartonCheckedOut.Text = "Checked";
+            this.olvCartonCheckedOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // olvPalletCheckedOut
+            // 
+            this.olvPalletCheckedOut.AspectName = "DoubleChecked";
+            this.olvPalletCheckedOut.CheckBoxes = true;
+            this.olvPalletCheckedOut.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvPalletCheckedOut.Text = "Checked";
+            this.olvPalletCheckedOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // SearchBarcode
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 823);
+            this.ClientSize = new System.Drawing.Size(611, 609);
             this.Controls.Add(this.panelCenter);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SearchBarcode";
@@ -298,5 +341,8 @@
         private System.Windows.Forms.Panel panelCenter;
         private System.Windows.Forms.TextBox textFilterPallet;
         private System.Windows.Forms.TextBox textFilterCarton;
+        private BrightIdeasSoftware.OLVColumn olvPackCheckedOut;
+        private BrightIdeasSoftware.OLVColumn olvCartonCheckedOut;
+        private BrightIdeasSoftware.OLVColumn olvPalletCheckedOut;
     }
 }

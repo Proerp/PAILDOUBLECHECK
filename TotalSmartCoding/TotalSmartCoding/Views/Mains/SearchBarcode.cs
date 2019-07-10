@@ -65,6 +65,8 @@ namespace TotalSmartCoding.Views.Mains
             this.customTabBatch.TabPages[0].Text = "Pack " + this.fastPacks.GetItemCount().ToString("N0") + " pack" + (this.fastPacks.GetItemCount() > 1 ? "s" : "");
             this.customTabBatch.TabPages[1].Text = "Carton: " + this.fastCartons.GetItemCount().ToString("N0") + " carton" + (this.fastCartons.GetItemCount() > 1 ? "s" : "");
             this.customTabBatch.TabPages[2].Text = "Pallet: " + this.fastPallets.GetItemCount().ToString("N0") + " pallet" + (this.fastPallets.GetItemCount() > 1 ? "s" : "");
+
+            this.customTabBatch.SelectedIndex = this.fastCartons.GetItemCount() > 0 ? 1 : (this.fastPallets.GetItemCount() > 0? 2 : 0);
         }
 
         private void textFilter_Enter(object sender, EventArgs e)
