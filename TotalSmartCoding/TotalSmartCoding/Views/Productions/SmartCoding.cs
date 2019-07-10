@@ -950,7 +950,7 @@ namespace TotalSmartCoding.Views.Productions
                     int barcodeID = this.getBarcodeID(dataGridView.CurrentCell, out selectedBarcode);
                     if (barcodeID > 0 && CustomMsgBox.Show(this, "Are you sure you want to remove this carton:" + (char)13 + (char)13 + selectedBarcode, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2) == System.Windows.Forms.DialogResult.Yes)
                         if (CustomInputBox.Show("Password", "Please input password", true, ref cellValue) == System.Windows.Forms.DialogResult.OK)
-                            if (cellValue == "9876543210")
+                            if (cellValue == "9876543210#")
                             {
                                 if (this.scannerController.MoveCartonToPendingQueue(barcodeID, dataGridView.Equals(this.dgvCartonsetQueue), true)) CustomMsgBox.Show(this, "Carton: " + selectedBarcode + "\r\nHas been removed successfully.", "Handle exception", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
