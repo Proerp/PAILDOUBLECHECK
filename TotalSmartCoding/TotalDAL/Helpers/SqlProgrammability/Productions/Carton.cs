@@ -227,7 +227,7 @@ namespace TotalDAL.Helpers.SqlProgrammability.Productions
             queryString = queryString + " AS " + "\r\n";
             queryString = queryString + "       UPDATE      Cartons " + "\r\n";
             queryString = queryString + "       SET         CheckedOut = CheckedOut + 1, CheckedDate = GETDATE() " + "\r\n";
-            queryString = queryString + "       WHERE       BatchID = @BatchID AND Label = @Label AND NOT PalletID IS NULL " + "\r\n";
+            queryString = queryString + "       WHERE       BatchID = @BatchID AND Label = @Label AND EntryStatusID IN (" + (int)GlobalVariables.BarcodeStatus.Freshnew + "," + (int)GlobalVariables.BarcodeStatus.Readytoset + "," + (int)GlobalVariables.BarcodeStatus.Wrapped + ")" + "\r\n";
 
             queryString = queryString + "       IF @@ROWCOUNT = 0 " + "\r\n";
             queryString = queryString + "           BEGIN " + "\r\n";

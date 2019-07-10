@@ -33,6 +33,8 @@ namespace TotalDTO.Productions
 
         public int QueueID { get; set; } //JUST FOR PackDTO ONLY
 
-        
+        public int CheckedOut { get; set; }
+
+        public bool DoubleChecked { get { return this.CheckedOut > 0; } }
     }
 }

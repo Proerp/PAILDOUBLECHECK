@@ -32,6 +32,7 @@
             this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCode = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvLabel = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvCheckedOut = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvRemarks = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.textFilter = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -46,11 +47,13 @@
             this.fastBarcodes.AllColumns.Add(this.olvColumn1);
             this.fastBarcodes.AllColumns.Add(this.olvCode);
             this.fastBarcodes.AllColumns.Add(this.olvLabel);
+            this.fastBarcodes.AllColumns.Add(this.olvCheckedOut);
             this.fastBarcodes.AllColumns.Add(this.olvRemarks);
             this.fastBarcodes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumn1,
             this.olvCode,
             this.olvLabel,
+            this.olvCheckedOut,
             this.olvRemarks});
             this.fastBarcodes.Cursor = System.Windows.Forms.Cursors.Default;
             this.fastBarcodes.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -63,7 +66,7 @@
             this.fastBarcodes.Name = "fastBarcodes";
             this.fastBarcodes.OwnerDraw = true;
             this.fastBarcodes.ShowGroups = false;
-            this.fastBarcodes.Size = new System.Drawing.Size(601, 658);
+            this.fastBarcodes.Size = new System.Drawing.Size(633, 658);
             this.fastBarcodes.TabIndex = 71;
             this.fastBarcodes.UnfocusedHighlightBackgroundColor = System.Drawing.SystemColors.Highlight;
             this.fastBarcodes.UseCompatibleStateImageBehavior = false;
@@ -97,6 +100,14 @@
             this.olvLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvLabel.Width = 108;
             // 
+            // olvCheckedOut
+            // 
+            this.olvCheckedOut.AspectName = "DoubleChecked";
+            this.olvCheckedOut.CheckBoxes = true;
+            this.olvCheckedOut.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCheckedOut.Text = "Checked";
+            this.olvCheckedOut.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // olvRemarks
             // 
             this.olvRemarks.AspectName = "Remarks";
@@ -111,7 +122,7 @@
             this.textFilter.Location = new System.Drawing.Point(73, 0);
             this.textFilter.Margin = new System.Windows.Forms.Padding(2);
             this.textFilter.Name = "textFilter";
-            this.textFilter.Size = new System.Drawing.Size(601, 23);
+            this.textFilter.Size = new System.Drawing.Size(633, 23);
             this.textFilter.TabIndex = 72;
             this.textFilter.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textFilter.TextChanged += new System.EventHandler(this.textFilter_TextChanged);
@@ -142,7 +153,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 681);
+            this.ClientSize = new System.Drawing.Size(706, 681);
             this.Controls.Add(this.fastBarcodes);
             this.Controls.Add(this.textFilter);
             this.Controls.Add(this.panel1);
@@ -172,5 +183,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumn1;
         private BrightIdeasSoftware.OLVColumn olvLabel;
         private BrightIdeasSoftware.OLVColumn olvRemarks;
+        private BrightIdeasSoftware.OLVColumn olvCheckedOut;
     }
 }

@@ -1238,7 +1238,17 @@ namespace TotalSmartCoding.Controllers.Productions
                     this.MainStatus = ""; this.MainStatus = "DBC: " + (arrayBarcode.Count() > 1 ? "Không thể kiểm tra 2 xô cùng lúc." : "Hệ thống kiểm tra chưa hoạt động");
                 }
                 else
-                    if (arrayBarcode[0] == "NoRead")
+                {
+                    var receivedBarcode = arrayBarcode[0];
+                    if (receivedBarcode != "NoRead" && receivedBarcode.IndexOf("HTTP://CONNECT.CASTROL.COM/ID-") == -1)
+                    {
+                        this.ionetSocketCheck.WritetoStream("||>OUTPUT.USER2\r\n");
+                        this.MainStatus = ""; this.MainStatus = "DBC: Mã vạch lạ: " + receivedBarcode;
+                    }
+                    else
+                        receivedBarcode = receivedBarcode.Replace("HTTP://CONNECT.CASTROL.COM/ID-", "").Trim();
+
+                    if (receivedBarcode == "NoRead")
                     {
                         //this.ionetSocketCheck.WritetoStream("||>OUTPUT.USER3\r\n"); NO NEED
                         this.MainStatus = ""; this.MainStatus = "DBC: " + "NoRead.";
@@ -1248,7 +1258,7 @@ namespace TotalSmartCoding.Controllers.Productions
                         bool cartonChecked = false;
                         lock (this.cartonController)
                         {
-                            cartonChecked = this.cartonController.cartonService.CartonChecked(this.FillingData.BatchID, arrayBarcode[0]);
+                            cartonChecked = this.cartonController.cartonService.CartonChecked(this.FillingData.BatchID, receivedBarcode);
                         }
 
                         if (cartonChecked)
@@ -1256,9 +1266,10 @@ namespace TotalSmartCoding.Controllers.Productions
                         else
                         {
                             this.ionetSocketCheck.WritetoStream("||>OUTPUT.USER2\r\n");
-                            this.MainStatus = ""; this.MainStatus = "DBC: " + arrayBarcode[0] + this.cartonController.cartonService.ServiceTag;
+                            this.MainStatus = ""; this.MainStatus = "DBC: " + receivedBarcode + this.cartonController.cartonService.ServiceTag;
                         }
                     }
+                }
             }
         }
 
