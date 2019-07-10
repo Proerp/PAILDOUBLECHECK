@@ -183,7 +183,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                this.buttonRemoveCarton.Enabled = !GlobalEnums.DisableRemove;
+                //this.buttonRemoveCarton.Enabled = !GlobalEnums.DisableRemove;
                 this.buttonRemoveCartonset.Enabled = !GlobalEnums.DisableRemove;
 
                 this.buttonDeleteCartonPending.Enabled = !GlobalEnums.DisableRemove;
@@ -941,7 +941,7 @@ namespace TotalSmartCoding.Views.Productions
         {
             try
             {
-                if (GlobalEnums.DisableRemove) return; //DISABLE REMOVE CARTON AT BP (03/MAR/2019)
+                //if (GlobalEnums.DisableRemove) return; //DISABLE REMOVE CARTON AT BP (03/MAR/2019)
 
                 DataGridView dataGridView = sender.Equals(this.buttonRemoveCarton) ? this.dgvCartonQueue : this.dgvCartonsetQueue;
                 if (dataGridView != null && dataGridView.CurrentCell != null)
